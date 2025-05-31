@@ -1,0 +1,412 @@
+{
+  "files.associations": {
+    "*.edc": "javascript"
+  },
+  "symbolOutline.doSort": true,
+  "window.menuBarVisibility": "toggle",
+  "eslint.enable": true,
+  "powershell.integratedConsole.suppressStartupBanner": true,
+  "launch": {
+    "configurations": [
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Chrome tizen simulator",
+        "file": "D:/tizen-studio/tools/websimulator/web/ripple.html?url=file:///${workspaceFolder}/index.html&platform=wearable-2.0",
+        "webRoot": "${workspaceFolder}",
+        "userDataDir": true,
+        "runtimeArgs": [
+          "--no-first-run",
+          "--activate-on-launch",
+          "--no-default-browser-check",
+          "--allow-file-access-from-files",
+          "--disable-translate",
+          "--disable-web-security",
+          "--user-data-dir=D:/tizen-studio/tools/websimulator/web/",
+          "--proxy-auto-detect",
+          "--proxy-bypass-list=127.0.0.1"
+        ]
+      },
+      {
+        "name": "Launch chrome",
+        "type": "chrome",
+        "request": "launch",
+        "port": 4100,
+        "url": "http://localhost:4220/",
+        "webRoot": "${workspaceFolder}",
+        "runtimeArgs": [
+          "--disable-web-security",
+          "--disable-features=CrossSiteDocumentBlockingAlways,CrossSiteDocumentBlockingIfIsolating"
+        ]
+      },
+      {
+        "name": "Launch firefox",
+        "type": "firefox",
+        "request": "launch",
+        "url": "http://localhost:4220/",
+        "webRoot": "${workspaceFolder}"
+      },
+      {
+        "name": "Launch edge",
+        "type": "edge",
+        "request": "launch",
+        "url": "http://localhost:4220/",
+        "webRoot": "${workspaceFolder}",
+        "runtimeArgs": [
+          "--disable-web-security --disable-features=CrossSiteDocumentBlockingAlways,CrossSiteDocumentBlockingIfIsolating"
+        ]
+      },
+      {
+        "name": "Launch karma",
+        "type": "chrome",
+        "request": "launch",
+        "port": 9333,
+        "url": "http://localhost:9877/debug.html",
+        "webRoot": "${workspaceFolder}",
+        "runtimeArgs": [
+          "--disable-web-security --disable-features=CrossSiteDocumentBlockingAlways,CrossSiteDocumentBlockingIfIsolating"
+        ]
+      }
+    ],
+    "compounds": []
+  },
+  "launcher.commands": [
+    {
+      "description": "Tizen Device Manager",
+      "executable": "C:\\tizen-studio\\tools\\device-manager\\bin\\device-manager.exe"
+    },
+    {
+      "description": "Tizen Certificate Manager",
+      "executable": "C:\\tizen-studio\\tools\\certificate-manager\\certificate-manager.exe"
+    },
+    {
+      "description": "Tizen Compile",
+      "executable": "C:\\tizen-studio\\tools\\ide\\bin\\tizen.bat",
+      "parameters": "build-web -opt -e Marketing/*,.git/*,.vscode/* -- \"%workspace%\"",
+    },
+    {
+      "description": "Tizen Package",
+      "executable": "C:\\tizen-studio\\tools\\ide\\bin\\tizen.bat",
+      "parameters": "package -t wgt -s tf-watch -- %1\\.buildResult",
+    },
+    {
+      "description": "Tizen Batch Build",
+      "executable": "C:\\Users\\micha\\git\\Tempus Fugit General Marketing\\tizen_build.bat",
+      "parameters": "\"%workspace%\"",
+      "startIn": "%workspace%",
+      "output": true
+    }
+  ],
+  "explorer.confirmDelete": false,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "materialTheme.cache.workbench.settings": {},
+  "material-icon-theme.activeIconPack": "angular",
+  "workbench.iconTheme": "vscode-icons",
+  "team.showWelcomeMessage": false,
+  "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+  "gitlens.advanced.messages": {
+    "suppressShowKeyBindingsNotice": true
+  },
+  "gitlens.historyExplorer.enabled": true,
+  "nativescript.analytics.enabled": true,
+  // Editor settings from Angular essentials
+  "editor.codeLens": true,
+  "editor.renderWhitespace": "none",
+  "editor.autoIndent": "full",
+  "editor.fontSize": 14,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": true,
+  // "editor.letterSpacing": 1,
+  "editor.tabSize": 2,
+  "editor.wordWrap": "off",
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
+  "peacock.favoriteColors": [
+    {
+      "name": "Angular Red",
+      "value": "#b52e31"
+    },
+    {
+      "name": "Auth0 Orange",
+      "value": "#eb5424"
+    },
+    {
+      "name": "Azure Blue",
+      "value": "#007fff"
+    },
+    {
+      "name": "C# Purple",
+      "value": "#68217A"
+    },
+    {
+      "name": "Gatsby Purple",
+      "value": "#639"
+    },
+    {
+      "name": "Go Cyan",
+      "value": "#5dc9e2"
+    },
+    {
+      "name": "Java Blue-Gray",
+      "value": "#557c9b"
+    },
+    {
+      "name": "JavaScript Yellow",
+      "value": "#f9e64f"
+    },
+    {
+      "name": "Mandalorian Blue",
+      "value": "#1857a4"
+    },
+    {
+      "name": "Node Green",
+      "value": "#215732"
+    },
+    {
+      "name": "React Blue",
+      "value": "#00b3e6"
+    },
+    {
+      "name": "Something Different",
+      "value": "#832561"
+    },
+    {
+      "name": "Vue Green",
+      "value": "#42b883"
+    }
+  ],
+  "vsicons.dontShowNewVersionMessage": true,
+  "sync.gist": "7ee031722f2e5bb8615993e0423e40b3",
+  "sync.autoUpload": true,
+  "sync.autoDownload": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "extensions.ignoreRecommendations": false,
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.fontWeight": "500",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "openapi.securityAuditToken": "CiAnDfmPcqUFUd4GmasqwYK1yENA123FGqiM5dywZ182whIYj/n/3CVO7i29MWZxhLaHj+jzGGly6GunGnNUs/BC8weMK2omG+W3fJOCgYNnKAJUoI/izlH4M90SKKUT8lMZ98SH1TFQfWYioNlLATBMEsFGqUdTrlftIGpDQSkqkOevW1PGRo/fqOulWRmfesGsZtSfFUn43I4455t8wovivvpYrN5joSnM/b2o7uCs",
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "text.notes.info",
+        "settings": {
+          "foreground": "#17a2b8",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "text.notes.success",
+        "settings": {
+          "foreground": "#28a745",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "text.notes.warning",
+        "settings": {
+          "foreground": "#ffc107",
+          "fontStyle": "bold"
+        }
+      },
+      {
+        "scope": "text.notes.danger",
+        "settings": {
+          "foreground": "#dc3545",
+          "fontStyle": "bold"
+        }
+      }
+    ]
+  },
+  "cSpell.userWords": [
+    "admin",
+    "admins",
+    "Booky",
+    "Chrome",
+    "CHRONICON",
+    "cutoff",
+    "DATEV",
+    "Edge",
+    "fakturierbare",
+    "Ganztagesbuchung",
+    "genehmigers",
+    "genehmigungsproze",
+    "genehmigungsprozeß",
+    "Integrationen",
+    "Teamkalender",
+    "timesheet",
+    "unbilled"
+  ],
+  "cSpell.language": "de,de-DE",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "powershell.powerShellDefaultVersion": "PowerShell (x64)",
+  "editor.accessibilitySupport": "off",
+  "team.showFarewellMessage": false,
+  "editor.detectIndentation": false,
+  "randomThemeSwitcher.themeList": [
+    "Abyss",
+    "Default Dark+",
+    "Default Light+",
+    "Visual Studio Dark",
+    "Visual Studio Light",
+    "Default High Contrast",
+    "Kimbie Dark",
+    "Monokai",
+    "Monokai Dimmed",
+    "Quiet Light",
+    "Red",
+    "Solarized Dark",
+    "Solarized Light",
+    "Tomorrow Night Blue",
+    "Community Material Theme",
+    "Community Material Theme High Contrast",
+    "Community Material Theme Darker",
+    "Community Material Theme Darker High Contrast",
+    "Community Material Theme Palenight",
+    "Community Material Theme Palenight High Contrast",
+    "Community Material Theme Ocean",
+    "Community Material Theme Ocean High Contrast",
+    "Community Material Theme Lighter",
+    "Community Material Theme Lighter High Contrast",
+    "Material Theme",
+    "Material Theme High Contrast",
+    "Material Theme Darker",
+    "Material Theme Darker High Contrast",
+    "Material Theme Palenight",
+    "Material Theme Palenight High Contrast",
+    "Material Theme Ocean",
+    "Material Theme Ocean High Contrast",
+    "Material Theme Lighter",
+    "Material Theme Lighter High Contrast",
+    "Slack Theme Aubergine - NEW COLOR",
+    "Slack Theme Aubergine",
+    "Slack Theme Aubergine Dark",
+    "Slack Theme Monument",
+    "Slack Theme Ochin",
+    "Slack Theme Work Hard",
+    "Slack Theme Choco Mint",
+    "Slack Theme Hoth",
+    "Slack Theme Protanopia & Deuteranopia",
+    "Slack Theme Tritanopia",
+    "Slack Theme Dark Mode",
+    "Winter is Coming (Dark Blue)",
+    "Winter is Coming (Dark Blue - No Italics)",
+    "Winter is Coming (Light)",
+    "Winter is Coming (Light - No Italics)",
+    "Winter is Coming (Dark Black)",
+    "Winter is Coming (Dark Black - No Italics)",
+    "Spirited Away",
+    "Visual Studio 2019 Dark",
+    "Visual Studio 2019 Light",
+    "PowerShell ISE",
+    "Viow Darker",
+    "Viow Flat",
+    "Viow Light",
+    "Viow Neon",
+    "Viow Mars",
+    "Viow Arabian",
+    "Viow Arabian - Mix"
+  ],
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+  },
+  "git.allowForcePush": true,
+  "git.confirmForcePush": false,
+  "liquid.format": true,
+  "debug.javascript.suggestPrettyPrinting": false,
+  "angular.experimental-ivy": true,
+  "json.schemas": [
+    {
+      "name": "vscode-expo-manifest",
+      "url": "file:///c%3A/Users/micha/AppData/Roaming/Code/User/globalStorage/bycedric.vscode-expo/manifest-45.0.0.json",
+      "fileMatch": [
+        "app.json",
+        "app.config.json"
+      ]
+    }
+  ],
+  "cSpell.experimental.enableRegexpView": true,
+  "cSpell.fixSpellingWithRenameProvider": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.excludeLanguages": [
+    "jsx",
+    "markdown"
+  ],
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.formatOnSave": true,
+  "debug.onTaskErrors": "debugAnyway",
+  "redhat.telemetry.enabled": true,
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vscode-edge-devtools.mirrorEdits": true,
+  "vscode-edge-devtools.themes": "Dark",
+  "vscode-edge-devtools.webhint": false,
+  "translation.api": "google",
+  "translation.fromLanguage": "de",
+  "translation.targetLanguage": "en",
+  "translation.detection": false,
+  "vscodeGoogleTranslate.preferredLanguage": "English",
+  "debug.javascript.autoAttachFilter": "disabled",
+  "azureResourceManagerTools.parameterFiles": {
+    "c:\\users\\micha\\downloads\\exportedtemplate-chronicon-pp\\template.json": "parameters.json",
+    "d:\\git\\plainstaff\\api\\azure\\frontdoor.json": "parameters-hotfix.json"
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "azureFunctions.showCoreToolsWarning": false,
+  "cSpell.maxNumberOfProblems": 10000,
+  "cSpell.ignoreRegExpList": [
+    "/[A-Z-_+0-9]{2,}.*[\\W.,;:]/g"
+  ],
+  "editor.unicodeHighlight.allowedLocales": {
+    "tr": true
+  },
+  "editor.formatOnSaveMode": "modifications",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "al.publisher": "",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "emulator.emulatorPathWindows": "d:/android/emulator",
+  "actionButtons": {
+
+    "commands": [],
+    "defaultColor": "white",
+    "reloadButton": "↻",
+    "loadNpmCommands": false
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
+  "cSpell.enabled": false,
+  "deepl.formality": "default",
+  "deepl.tagHandling": "off",
+  "deepl.splitSentences": "1",
+  "deepl.translationMode": "Replace",
+  "prettier.prettierPath": "./node_modules/prettier",
+  "settingsSync.ignoredExtensions": [
+    "equinusocio.vsc-material-theme"
+  ],
+  "playwright.reuseBrowser": false,
+  "playwright.showTrace": true,
+  "git.autofetch": true,
+  "eslint.run": "onSave",
+  "git.openRepositoryInParentFolders": "never",
+  "terminal.integrated.defaultProfile.linux": "JavaScript Debug Terminal",
+  "accessibility.voice.speechLanguage": "de-DE",
+  "github.copilot.editor.enableCodeActions": false,
+  "github.copilot.renameSuggestions.triggerAutomatically": false
+}

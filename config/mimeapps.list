@@ -1,0 +1,11 @@
+[Default Applications]
+x-scheme-handler/http=com.microsoft.Edge.desktop
+application/xhtml+xml=com.microsoft.Edge.desktop
+text/html=com.microsoft.Edge.desktop
+x-scheme-handler/https=com.microsoft.Edge.desktop
+
+[Added Associations]
+x-scheme-handler/http=com.microsoft.Edge.desktop;
+application/xhtml+xml=com.microsoft.Edge.desktop;
+text/html=com.microsoft.Edge.desktop;
+x-scheme-handler/https=com.microsoft.Edge.desktop;
