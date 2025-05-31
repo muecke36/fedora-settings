@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This script is used to open the KeePassXC application if it is not running already.
+if ! pgrep -x "keepassxc" >/dev/null; then
+  keepassxc &
+else
+  gdbus call --session --dest org.gnome.Shell \
+    --object-path /de/lucaswerkmeister/ActivateWindowByTitle \
+    --method de.lucaswerkmeister.ActivateWindowByTitle.activateBySubstring \
+    'KeePassXC'
+fi

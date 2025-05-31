@@ -17,6 +17,13 @@ install_basics() {
     zsh \
     --setopt=strict=0
 
+  # Gnome extensions
+  gnome-extensions install \
+    https://extensions.gnome.org/extension/545/hide-top-bar/ \
+    https://extensions.gnome.org/extension/7065/tiling-shell/ \
+    https://extensions.gnome.org/extension/6281/wallpaper-slideshow/ \
+    https://extensions.gnome.org/extension/5021/activate-window-by-title/
+
   # Oh My Zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
@@ -50,8 +57,18 @@ install_android_emulator() {
 install_configs() {
   mkdir ~/git
   git clone https://github.com/muecke36/fedora-settings.git ~/git/fedora-settings
+
+  # copy configs
   cp -R ~/git/fedora-settings/config/* ~/.config
+
+  # copy .zshrc
   cp ~/git/fedora-settings/.zshrc ~/.zshrc
+
+  # copy bin files
+  cp -R ~/git/fedora-settings/bin/* ~/bin
+
+  # set all files in ~/bin to be executable
+  find ~/bin -type f -exec chmod +x {} \;
 }
 
 install_texlive_packages() {
