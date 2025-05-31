@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This script is used to open the terminal application if it is not running already.
+if ! pgrep -x "ptyxis" >/dev/null; then
+  ptyxis &
+else
+  gdbus call --session --dest org.gnome.Shell \
+    --object-path /de/lucaswerkmeister/ActivateWindowByTitle \
+    --method de.lucaswerkmeister.ActivateWindowByTitle.activateBySubstring \
+    'ptyxis'
+fi
