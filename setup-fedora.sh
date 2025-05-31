@@ -21,6 +21,20 @@ install_npm_packages() {
     sudo npm install -g nvm expo-cli gulp-cli azure-functions-core-tools@4 --unsafe-perm true
 }
 
+install_android_studio() {
+    destination="$HOME/android/"
+toolsDownloadUrl=$(curl https://developer.android.com/studio | grep -o "https:\/\/dl.google.com\/android\/repository\/commandlinetools\-mac\-[0-9]*_latest\.zip")
+
+# Download and extract the contents
+curl --location -o android.zip $toolsDownloadUrl
+unzip -q android.zip -d ./android-temp
+
+mkdir -p "$destination/cmdline-tools/latest"
+mv ./android-temp/tools/* "$destination/cmdline-tools/latest"
+rm -rf ./android-temp
+rm android.zip
+}
+
 install_configs() {
     mkdir ~/git
     git clone https://github.com/muecke36/fedora-settings.git ~/git/fedora-settings
