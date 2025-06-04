@@ -87,8 +87,9 @@ install_texlive_packages() {
 install_flatpaks() {
   # Flatpaks
   echo "Installing flatpaks from Flathub"
-  flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
+  flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo  
+  
+  flatpak install com.freerdp.FreeRDP
   flatpak --user install flathub com.getpostman.Postman
 }
 
