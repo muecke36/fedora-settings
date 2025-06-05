@@ -1,0 +1,4 @@
+[Context]
+devices=all;shm;kvm;input
+features=bluetooth
+filesystems=home
