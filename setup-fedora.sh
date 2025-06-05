@@ -14,7 +14,7 @@ install_basics() {
   # Basics
   sudo dnf install seahorse audacity easyeffects gnome-extensions-app onedriver \
     gnome-tweaks keepassxc git chromium firefox nodejs microsoft-edge-stable code \
-    zsh \
+    zsh snapd \
     --setopt=strict=0
 
   # Gnome extensions
@@ -93,6 +93,8 @@ install_flatpaks() {
   flatpak --user install com.freerdp.FreeRDP
   flatpak --user install com.github.tchx84.Flatseal
   flatpak --user install flathub com.getpostman.Postman
+
+  sudo snap install ngrok
 }
 
 usage() {
