@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ms-appx-web Protokoll-Handler</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdn.tailwindcss.com"></link>
+    <script>
+        if ('tailwind' in window) {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Inter', 'sans-serif'],
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            color: #1f2937;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 1rem;
+            text-align: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1rem;
+            color: #111827; /* gray-900 */
+        }
+        p {
+            font-size: 1.125rem; /* text-lg */
+            margin-bottom: 0.5rem;
+        }
+        #searchOutput {
+            font-weight: 600;
+            color: #2563eb; /* blue-600 */
+            background-color: #eff6ff; /* blue-50 */
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1d5db; /* blue-200 */
+            min-height: 50px;
+            word-wrap: break-word;
+        }
+        .info-text {
+            font-size: 0.875rem; /* text-sm */
+            color: #4b5563; /* gray-600 */
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Protokoll-Handler Ergebnis</h1>
+        <p>Der über das <code>ms-appx-web</code> Protokoll empfangene Such-String ist:</p>
+        <div id="searchOutput" class="p-3 rounded-lg bg-blue-50 border border-blue-200">
+            Warte auf Eingabe...
+        </div>
+        <p class="info-text">
+            Diese Seite fängt Aufrufe über das <code>ms-appx-web</code> Protokoll ab (nach Installation als PWA und Konfiguration in Windows) und zeigt den übergebenen Wert an.
+            Der Such-String wird erwartet als Teil der URL, z.B. <code>ms-appx-web:///meine-app/?search=IhrSuchbegriff</code>.
+        </p>
+    </div>
+
+    <script>
+        // Service Worker Registrierung
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registriert mit Scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('ServiceWorker Registrierung fehlgeschlagen:', error);
+                    });
+            });
+        }
+
+        // Funktion zum Extrahieren von Query-Parametern
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Such-String anzeigen
+        window.addEventListener('DOMContentLoaded', () => {
+            const searchOutputElement = document.getElementById('searchOutput');
+            // Der Handler in manifest.json ist so konfiguriert, dass er den Wert als "protocolArgs" übergibt
+            // Alternativ, wenn die URL direkt geöffnet wird, könnte es ein anderer Parameter sein.
+            // Wir suchen nach "protocolArgs", wie es vom ms-appx-web Handler typischerweise weitergeleitet wird
+            // oder nach "search" für direkte Tests.
+            let searchString = getQueryParam('search'); // Für direkte Tests über URL-Parameter
+
+            if (!searchString && window.location.search) {
+                 // Versuche, den Wert aus der "%s" Ersetzung im Manifest zu bekommen.
+                 // Wenn manifest.json "url": "/index.html?protocolArgs=%s" verwendet,
+                 // dann ist der Parametername "protocolArgs".
+                 // Oder wenn es "url": "/index.html?%s" ist, dann ist der gesamte String nach ? der Wert.
+                 // Wir gehen hier von einem benannten Parameter aus "protocolArgs".
+                 // Oftmals landet der String direkt als Query-String ohne Namen, z.B. /index.html?DER_GANZE_STRING
+                 // In diesem Fall müssten wir window.location.search direkt parsen.
+
+                const params = new URLSearchParams(window.location.search);
+                // ms-appx-web leitet oft den gesamten String weiter.
+                // Beispiel: ms-appx-web:///foo/bar?test=123
+                // wird zu /index.html?foo/bar?test=123 (wenn der Handler /index.html?%s ist)
+                // oder /index.html?protocolArgs=foo/bar?test=123
+                // Das %s in "url": "/index.html?protocolArgs=%s" wird durch den gesamten String nach ms-appx-web:// ersetzt.
+                // Es ist sicherer, den Parameter zu nehmen, der von `protocol_handlers` `url` definiert wird.
+                // Hier nehmen wir an, der Parameter heißt 'search' oder 'protocolArgs'
+                searchString = getQueryParam('protocolArgs') || getQueryParam('search');
+
+                if(!searchString && window.location.search.startsWith('?')) {
+                    // Fallback: Wenn keine bekannten Parameter gefunden wurden, aber ein Query-String vorhanden ist,
+                    // nimm den gesamten Query-String (ohne das führende '?')
+                    searchString = decodeURIComponent(window.location.search.substring(1));
+                }
+            }
+
+
+            if (searchString) {
+                searchOutputElement.textContent = searchString;
+                searchOutputElement.classList.remove('bg-blue-50', 'border-blue-200');
+                searchOutputElement.classList.add('bg-green-50', 'border-green-300', 'text-green-700');
+
+            } else {
+                searchOutputElement.textContent = 'Kein Such-String gefunden oder die App wurde nicht über das Protokoll gestartet.';
+                searchOutputElement.classList.remove('bg-blue-50', 'border-blue-200');
+                searchOutputElement.classList.add('bg-yellow-50', 'border-yellow-300', 'text-yellow-700');
+            }
+        });
+    </script>
+</body>
+</html>
