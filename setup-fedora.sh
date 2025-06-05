@@ -60,6 +60,7 @@ install_configs() {
 
   # copy configs
   cp -R ~/git/fedora-settings/config/* ~/.config
+  cp -R ~/git/fedora-settings/local/* ~/.local
 
   # copy .zshrc
   cp ~/git/fedora-settings/.zshrc ~/.zshrc
