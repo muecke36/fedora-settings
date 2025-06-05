@@ -13,7 +13,7 @@ install_basics() {
 
   # Basics
   sudo dnf install seahorse audacity easyeffects gnome-extensions-app onedriver \
-    gnome-tweaks keepassxc git chromium firefox nodejs microsoft-edge-stable code edge \
+    gnome-tweaks keepassxc git chromium firefox nodejs microsoft-edge-stable code \
     zsh \
     --setopt=strict=0
 
