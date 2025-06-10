@@ -23,6 +23,16 @@ install_basics() {
 
 }
 
+clone_repos() {
+  # clone repos
+  mkdir -p ~/git/PlainStaff
+  git clone https://auronet@dev.azure.com/auronet/PlainStaff/_git/PlainStaff ~/git/PlainStaff/Web
+  git clone https://auronet@dev.azure.com/auronet/PlainStaff%20Admin/_git/PlainStaff%20Admin ~/git/PlainStaff/Admin
+  git clone https://auronet@dev.azure.com/auronet/PlainStaff%20API/_git/PlainStaff%20API ~/git/PlainStaff/Api
+  git clone https://auronet@dev.azure.com/auronet/PlainStaff%20Mobile/_git/Expo ~/git/PlainStaff/Mobile
+  git clone https://auronet@dev.azure.com/auronet/PlainStaff%20Shared/_git/PlainStaff%20Shared ~/git/PlainStaff/Shared
+}
+
 install_gnome_extensions() {
   array=(https://extensions.gnome.org/extension/545/hide-top-bar/
     https://extensions.gnome.org/extension/7065/tiling-shell/
@@ -128,7 +138,7 @@ setup_grub() {
 usage() {
   echo "$0: Install packages and software"
   echo
-  echo "Usage: $0 [-subtfanFh]"
+  echo "Usage:"
   echo
   echo "-b: install basics"
   echo "-c: install configs"
@@ -136,6 +146,7 @@ usage() {
   echo "-n: install npm packages"
   echo "-e: install android emulator"
   echo "-z: install zsh"
+  echo "-r: clone repos"
   echo "-s: setup grub"
   echo "-t: install TeXlive packages"
   echo "-f: install flatpaks from flathub: also sets up flathub"
@@ -149,7 +160,7 @@ if [ $# -lt 1 ]; then
 fi
 
 # parse options
-while getopts "cnegsbtfzahnF" OPTION; do
+while getopts "cnegsbtrfzahnF" OPTION; do
   case $OPTION in
   c)
     install_configs
@@ -161,6 +172,10 @@ while getopts "cnegsbtfzahnF" OPTION; do
     ;;
   s)
     setup_grub
+    exit 0
+    ;;
+  r)
+    clone_repos
     exit 0
     ;;
   z)
