@@ -14,7 +14,7 @@ install_basics() {
   # Basics
   sudo dnf install seahorse audacity easyeffects gnome-extensions-app onedriver \
     gnome-tweaks keepassxc git chromium firefox nodejs microsoft-edge-stable code \
-    zsh snapd setzer crudini \
+    zsh snapd setzer crudini ydotool \
     --setopt=strict=0
 
   git config --global user.name "Michael Mücke"
@@ -27,7 +27,7 @@ install_gnome_extensions() {
   array=(https://extensions.gnome.org/extension/545/hide-top-bar/
     https://extensions.gnome.org/extension/7065/tiling-shell/
     https://extensions.gnome.org/extension/6281/wallpaper-slideshow/
-    https://extensions.gnome.org/extension/4833/all-windows-saverestore-window-positions/
+    https://extensions.gnome.org/extension/4709/another-window-session-manager/
     https://extensions.gnome.org/extension/5021/activate-window-by-title/)
 
   for i in "${array[@]}"; do
