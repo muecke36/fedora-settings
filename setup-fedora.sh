@@ -110,6 +110,13 @@ install_flatpaks() {
   sudo snap install ngrok postman onlyoffice
 }
 
+setup_grub() {
+  sudo crudini --set "/etc/default/grub" "GRUB_GFXMODE" "1920x1080x32"
+  sudo crudini --set "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX" "keep"
+  sudo crudini --set "/etc/default/grub" "GRUB_TERMINAL" ""
+  sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+}
+
 usage() {
   echo "$0: Install packages and software"
   echo
@@ -121,6 +128,7 @@ usage() {
   echo "-n: install npm packages"
   echo "-e: install android emulator"
   echo "-z: install zsh"
+  echo "-s: setup grub"
   echo "-t: install TeXlive packages"
   echo "-f: install flatpaks from flathub: also sets up flathub"
   echo "-a: do all of the above"
@@ -133,7 +141,7 @@ if [ $# -lt 1 ]; then
 fi
 
 # parse options
-while getopts "cnegbtfzahnF" OPTION; do
+while getopts "cnegsbtfzahnF" OPTION; do
   case $OPTION in
   c)
     install_configs
@@ -141,6 +149,10 @@ while getopts "cnegbtfzahnF" OPTION; do
     ;;
   g)
     install_gnome_extensions
+    exit 0
+    ;;
+  s)
+    setup_grub
     exit 0
     ;;
   z)
