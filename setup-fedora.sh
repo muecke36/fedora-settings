@@ -112,7 +112,7 @@ install_flatpaks() {
   flatpak --user install com.freerdp.FreeRDP
   flatpak --user install com.github.tchx84.Flatseal
 
-  sudo snap install ngrok postman onlyoffice
+  sudo snap install ngrok postman onlyoffice-desktopeditors
 }
 
 setup_grub() {
