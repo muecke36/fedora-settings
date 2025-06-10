@@ -120,6 +120,7 @@ setup_grub() {
   sudo bash /tmp/install.sh
 
   sudo crudini --set "/etc/default/grub" "GRUB_GFXMODE" "1024x768,800x600,640x480,auto"
+  sudo crudini --set "/etc/default/grub" "GRUB_TIMEOUT" "20"
   sudo sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 }
 
