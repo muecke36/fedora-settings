@@ -6,8 +6,7 @@ install_basics() {
   sudo dnf copr enable jstaf/onedriver
   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
   sudo dnf config-manager addrepo --from-repofile=https://packages.microsoft.com/yumrepos/edge/config.repo
-  echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" |
-    sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
+  echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
 
   dnf check-update
 
@@ -54,6 +53,7 @@ install_gnome_extensions() {
 }
 
 install_npm_packages() {
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/latest/install.sh | bash
   sudo npm install -g nvm expo-cli gulp-cli azure-functions-core-tools@4 --unsafe-perm true
 }
 
