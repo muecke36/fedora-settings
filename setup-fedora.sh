@@ -53,7 +53,7 @@ install_gnome_extensions() {
 }
 
 install_npm_packages() {
-  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/latest/install.sh | bash
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
   sudo npm install -g nvm expo-cli gulp-cli azure-functions-core-tools@4 --unsafe-perm true
 }
 
