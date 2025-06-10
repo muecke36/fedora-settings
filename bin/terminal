@@ -6,6 +6,6 @@ if ! pgrep -x "ptyxis" >/dev/null; then
 else
   gdbus call --session --dest org.gnome.Shell \
     --object-path /de/lucaswerkmeister/ActivateWindowByTitle \
-    --method de.lucaswerkmeister.ActivateWindowByTitle.activateBySubstring \
-    'ptyxis'
+    --method de.lucaswerkmeister.ActivateWindowByTitle.activateByWmClass \
+    'org.gnome.Ptyxis'
 fi
