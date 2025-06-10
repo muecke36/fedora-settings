@@ -16,9 +16,6 @@ install_basics() {
     gnome-tweaks keepassxc git chromium firefox nodejs microsoft-edge-stable code \
     zsh snapd \
     --setopt=strict=0
-
-  # Oh My Zsh
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install_gnome_extensions() {
@@ -42,6 +39,11 @@ install_gnome_extensions() {
 
 install_npm_packages() {
   sudo npm install -g nvm expo-cli gulp-cli azure-functions-core-tools@4 --unsafe-perm true
+}
+
+install_zsh() {
+  # Oh My Zsh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
 
 install_android_emulator() {
@@ -106,7 +108,6 @@ install_flatpaks() {
   flatpak --user install com.github.tchx84.Flatseal
 
   sudo snap install ngrok postman onlyoffice
-  sudo snap install deepin-dde --edge --devmode
 }
 
 usage() {
@@ -119,6 +120,7 @@ usage() {
   echo "-g: install gnome extensions"
   echo "-n: install npm packages"
   echo "-e: install android emulator"
+  echo "-z: install zsh"
   echo "-t: install TeXlive packages"
   echo "-f: install flatpaks from flathub: also sets up flathub"
   echo "-a: do all of the above"
@@ -131,7 +133,7 @@ if [ $# -lt 1 ]; then
 fi
 
 # parse options
-while getopts "cnegbtfahnF" OPTION; do
+while getopts "cnegbtfzahnF" OPTION; do
   case $OPTION in
   c)
     install_configs
@@ -139,6 +141,10 @@ while getopts "cnegbtfahnF" OPTION; do
     ;;
   g)
     install_gnome_extensions
+    exit 0
+    ;;
+  z)
+    install_zsh
     exit 0
     ;;
   n)
@@ -168,6 +174,8 @@ while getopts "cnegbtfahnF" OPTION; do
     install_android_emulator
     install_texlive_packages
     install_flatpaks
+    install_gnome_extensions
+    install_zsh
     exit 0
     ;;
   h)
