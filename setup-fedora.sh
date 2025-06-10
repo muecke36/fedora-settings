@@ -14,8 +14,13 @@ install_basics() {
   # Basics
   sudo dnf install seahorse audacity easyeffects gnome-extensions-app onedriver \
     gnome-tweaks keepassxc git chromium firefox nodejs microsoft-edge-stable code \
-    zsh snapd \
+    zsh snapd setzer crudini \
     --setopt=strict=0
+
+  git config --global user.name "Michael Mücke"
+  git config --global user.email "michael.muecke@auronet.de"
+  git config --global credential.helper store
+
 }
 
 install_gnome_extensions() {
@@ -59,7 +64,7 @@ install_android_emulator() {
   rm -rf ./android-temp
   rm android.zip
 
-  cd "$destination/cmdline-tools/tools"
+  cd "$destination/cmdline-tools/tools/bin"
   ./sdkmanager platform-tools emulator
   sdkmanager "system-images;android-36;google_apis;x86_64" "platforms;android-36"
   avdmanager create avd --name phone --package "system-images;android-36;google_apis;x86_64" -d "pixel_9_pro"
@@ -111,10 +116,11 @@ install_flatpaks() {
 }
 
 setup_grub() {
-  sudo crudini --set "/etc/default/grub" "GRUB_GFXMODE" "1920x1080x32"
-  sudo crudini --set "/etc/default/grub" "GRUB_GFXPAYLOAD_LINUX" "keep"
-  sudo crudini --set "/etc/default/grub" "GRUB_TERMINAL" ""
-  sudo grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+  wget -P /tmp https://github.com/shvchk/fallout-grub-theme/raw/master/install.sh
+  sudo bash /tmp/install.sh
+
+  sudo crudini --set "/etc/default/grub" "GRUB_GFXMODE" "1024x768,800x600,640x480,auto"
+  sudo sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 }
 
 usage() {
