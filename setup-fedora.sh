@@ -27,6 +27,7 @@ install_gnome_extensions() {
   array=(https://extensions.gnome.org/extension/545/hide-top-bar/
     https://extensions.gnome.org/extension/7065/tiling-shell/
     https://extensions.gnome.org/extension/6281/wallpaper-slideshow/
+    https://extensions.gnome.org/extension/4833/all-windows-saverestore-window-positions/
     https://extensions.gnome.org/extension/5021/activate-window-by-title/)
 
   for i in "${array[@]}"; do
