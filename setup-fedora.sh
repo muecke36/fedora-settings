@@ -17,15 +17,27 @@ install_basics() {
     zsh snapd \
     --setopt=strict=0
 
-  # Gnome extensions
-  gnome-extensions install \
-    https://extensions.gnome.org/extension/545/hide-top-bar/ \
-    https://extensions.gnome.org/extension/7065/tiling-shell/ \
-    https://extensions.gnome.org/extension/6281/wallpaper-slideshow/ \
-    https://extensions.gnome.org/extension/5021/activate-window-by-title/
-
   # Oh My Zsh
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+}
+
+install_gnome_extensions() {
+  array=(https://extensions.gnome.org/extension/545/hide-top-bar/
+    https://extensions.gnome.org/extension/7065/tiling-shell/
+    https://extensions.gnome.org/extension/6281/wallpaper-slideshow/
+    https://extensions.gnome.org/extension/5021/activate-window-by-title/)
+
+  for i in "${array[@]}"; do
+    EXTENSION_ID=$(curl -s $i | grep -oP 'data-uuid="\K[^"]+')
+    VERSION_TAG=$(curl -Lfs "https://extensions.gnome.org/extension-query/?search=$EXTENSION_ID" | jq '.extensions[0] | .shell_version_map | map(.pk) | max')
+    wget -O ${EXTENSION_ID}.zip "https://extensions.gnome.org/download-extension/${EXTENSION_ID}.shell-extension.zip?version_tag=$VERSION_TAG"
+    gnome-extensions install --force ${EXTENSION_ID}.zip
+    if ! gnome-extensions list | grep --quiet ${EXTENSION_ID}; then
+      busctl --user call org.gnome.Shell.Extensions /org/gnome/Shell/Extensions org.gnome.Shell.Extensions InstallRemoteExtension s ${EXTENSION_ID}
+    fi
+    gnome-extensions enable ${EXTENSION_ID}
+    rm ${EXTENSION_ID}.zip
+  done
 }
 
 install_npm_packages() {
@@ -55,8 +67,8 @@ install_android_emulator() {
 }
 
 install_configs() {
-  mkdir ~/git
-  git clone https://github.com/muecke36/fedora-settings.git ~/git/fedora-settings
+  #  mkdir ~/git
+  #  git clone https://github.com/muecke36/fedora-settings.git ~/git/fedora-settings
 
   # copy configs
   cp -R ~/git/fedora-settings/config/* ~/.config
@@ -88,12 +100,13 @@ install_texlive_packages() {
 install_flatpaks() {
   # Flatpaks
   echo "Installing flatpaks from Flathub"
-  flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo  
-  
+  flatpak --user remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
   flatpak --user install com.freerdp.FreeRDP
   flatpak --user install com.github.tchx84.Flatseal
 
   sudo snap install ngrok postman onlyoffice
+  sudo snap install deepin-dde --edge --devmode
 }
 
 usage() {
@@ -103,6 +116,7 @@ usage() {
   echo
   echo "-b: install basics"
   echo "-c: install configs"
+  echo "-g: install gnome extensions"
   echo "-n: install npm packages"
   echo "-e: install android emulator"
   echo "-t: install TeXlive packages"
@@ -117,10 +131,14 @@ if [ $# -lt 1 ]; then
 fi
 
 # parse options
-while getopts "cnebtfahnF" OPTION; do
+while getopts "cnegbtfahnF" OPTION; do
   case $OPTION in
   c)
     install_configs
+    exit 0
+    ;;
+  g)
+    install_gnome_extensions
     exit 0
     ;;
   n)
