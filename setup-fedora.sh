@@ -93,7 +93,7 @@ install_flatpaks() {
   flatpak --user install com.freerdp.FreeRDP
   flatpak --user install com.github.tchx84.Flatseal
 
-  sudo snap install ngrok postman
+  sudo snap install ngrok postman onlyoffice
 }
 
 usage() {
