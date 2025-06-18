@@ -7,6 +7,8 @@ install_basics() {
   sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
   sudo dnf config-manager addrepo --from-repofile=https://packages.microsoft.com/yumrepos/edge/config.repo
   echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo >/dev/null
+  sudo dnf install -y https://packages.microsoft.com/config/rhel/9.0/packages-microsoft-prod.rpm
+  sudo dnf install azure-cli
 
   dnf check-update
 
@@ -123,7 +125,7 @@ install_flatpaks() {
   flatpak --user install com.freerdp.FreeRDP
   flatpak --user install com.github.tchx84.Flatseal
 
-  sudo snap install ngrok postman onlyoffice-desktopeditors
+  sudo snap install ngrok postman onlyoffice-desktopeditors storage-explorer
 }
 
 setup_grub() {
