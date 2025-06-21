@@ -73,7 +73,7 @@ install_android_emulator() {
   unzip -q android.zip -d ./android-temp
 
   mkdir -p "$destination/cmdline-tools/tools"
-  mv ./android-temp/cmdline-tools/* "$destination/cmdline-tools/tools"
+  mv -f ./android-temp/cmdline-tools/* "$destination/cmdline-tools/tools"
   rm -rf ./android-temp
   rm android.zip
 
@@ -82,8 +82,8 @@ install_android_emulator() {
   sdkmanager "system-images;android-36;google_apis;x86_64" "platforms;android-36"
   avdmanager create avd --name phone --package "system-images;android-36;google_apis;x86_64" -d "pixel_9_pro"
 
-  crudini --set "~/.android/avd/phone.avd/config.ini" "fastboot.forceColdBoot" "yes"
-  crudini --set "~/.android/avd/phone.avd/config.ini" "hw.keyboard" "yes"
+  crudini --set ~/.android/avd/phone.avd/config.ini "fastboot.forceColdBoot" "yes"
+  crudini --set ~/.android/avd/phone.avd/config.ini "hw.keyboard" "yes"
 }
 
 install_configs() {
